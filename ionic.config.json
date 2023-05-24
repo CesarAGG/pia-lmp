@@ -1,0 +1,7 @@
+{
+  "name": "pia-lmp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
