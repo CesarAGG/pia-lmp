@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Materia, Evaluacion } from '../interfaces';
 
 @Component({
   selector: 'app-materia-card',
