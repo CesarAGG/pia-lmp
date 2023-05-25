@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit, Component } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MateriaCardComponent } from './materia-card/materia-card.component';
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common'; // Importar el módulo CommonModule
+
 
 
 
@@ -25,7 +27,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-    IonicModule
+    IonicModule,
+    CommonModule // Agregar el módulo a imports
   ],
   exports: [RouterModule]
 })

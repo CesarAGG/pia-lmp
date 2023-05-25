@@ -10,8 +10,8 @@
       <ion-item *ngFor="let evaluacion of materia.evaluaciones">
         <ion-label>{{ evaluacion.nombre }}</ion-label>
         <ion-label>{{ evaluacion.tipo }}</ion-label>
-        <ion-label>{{ evaluacion.PO }}%</ion-label>
-        <ion-label>{{ evaluacion.PP }}%</ion-label>
+        <ion-label>PO: {{ evaluacion.PO }}%</ion-label>
+        <ion-label>PP: {{ evaluacion.PP }}%</ion-label>
       </ion-item>
     </ion-list>
   </ion-card-content>
