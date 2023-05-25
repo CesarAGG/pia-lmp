@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Materia, Evaluacion } from '../interfaces';
+import { IonicModule } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-materia-card',
@@ -13,3 +15,8 @@ export class MateriaCardComponent  implements OnInit {
   ngOnInit() {}
 
 }
+@NgModule({
+  declarations: [MateriaCardComponent],
+  imports: [IonicModule],
+})
+export class MateriaCardModule {}
