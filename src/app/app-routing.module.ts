@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MateriaCardComponent } from './materia-card/materia-card.component';
+import { IonicModule } from '@ionic/angular';
 
 
 
@@ -15,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-  path: 'materia-card',
+  path: 'materia',
   component: MateriaCardComponent,
   pathMatch: 'full'
   }
@@ -23,7 +24,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    IonicModule
   ],
   exports: [RouterModule]
 })
