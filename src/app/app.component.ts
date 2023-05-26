@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -10,7 +10,7 @@ export class AppComponent {
   constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+    this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       if (isAuthenticated) {
         // User is authenticated
         // Perform any necessary actions

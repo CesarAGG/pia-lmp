@@ -34,10 +34,10 @@ export class HomePage {
 
   postDataToAPI() {
     this.crud.createMateria(this.testMateria).subscribe(
-      (data) => {
+      data => {
         console.log(data); // Handle the response data
       },
-      (error) => {
+      error => {
         console.error(error); // Handle any errors
       }
     );
@@ -45,10 +45,10 @@ export class HomePage {
 
   getDataFromAPI() {
     this.crud.getAllMaterias().subscribe(
-      (data) => {
+      data => {
         console.log(data); // Handle the response data
       },
-      (error) => {
+      error => {
         console.error(error); // Handle any errors
       }
     );
@@ -56,10 +56,10 @@ export class HomePage {
 
   getMateriaFromAPI() {
     this.crud.getMateria(this.materiaId).subscribe(
-      (data) => {
+      data => {
         console.log(data); // Handle the response data
       },
-      (error) => {
+      error => {
         console.error(error); // Handle any errors
       }
     );

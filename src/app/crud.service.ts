@@ -12,20 +12,15 @@ export class CrudService {
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   getMateria(materiaId: string) {
-    return this.auth.user$.pipe(
-      filter(user => user !== null),  // filter out null users
-      switchMap(user =>
-        this.auth.getAccessTokenSilently().pipe(
-          switchMap(token => {
-            if (token) {
-              const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-              return this.http.get(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers });
-            } else {
-              throw new Error('User is not authenticated');
-            }
-          })
-        )
-      )
+    return this.auth.getAccessTokenSilently().pipe(
+      switchMap(token => {
+        if (token) {
+          const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+          return this.http.get(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers });
+        } else {
+          throw new Error('User is not authenticated');
+        }
+      })
     );
   }
 
@@ -49,7 +44,7 @@ export class CrudService {
 
   createMateria(materia: any) {
     return this.auth.getAccessTokenSilently().pipe(
-      switchMap((token) => {
+      switchMap(token => {
         if (token) {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.post(environment.apiBaseUrl + '/api/materia', materia, { headers });
@@ -62,7 +57,7 @@ export class CrudService {
 
   updateMateria(materiaId: string, updatedMateria: any) {
     return this.auth.getAccessTokenSilently().pipe(
-      switchMap((token) => {
+      switchMap(token => {
         if (token) {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.put(`${environment.apiBaseUrl}/api/materia/${materiaId}`, updatedMateria, { headers });
@@ -75,7 +70,7 @@ export class CrudService {
 
   deleteMateria(materiaId: string) {
     return this.auth.getAccessTokenSilently().pipe(
-      switchMap((token) => {
+      switchMap(token => {
         if (token) {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.delete(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers });

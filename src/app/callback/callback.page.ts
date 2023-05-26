@@ -13,7 +13,7 @@ export class CallbackPage implements OnInit {
 
   ngOnInit() {
     this.auth.handleRedirectCallback().subscribe(() => {
-      this.router.navigate(['/home']); // Redirect to the home page or any desired route
+      this.router.navigate(['/home']).catch(err => console.error(err)); // Redirect to the home page or any desired route
     });
   }
 
