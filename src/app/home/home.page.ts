@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,11 +11,26 @@ export class HomePage {
 
   materiaId: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public auth: AuthService) { }
+
+  NgOninit() {
+
+    this.auth.idTokenClaims$.subscribe((claims) => {
+      if (claims && claims.__raw) {
+        const accessToken = claims.__raw;
+      } else {
+        console.error('Access token not available.');
+      }
+    });
+  }
 
   getMateriaById() {
     if (this.materiaId) {
       const apiUrl = `${environment.apiBaseUrl}/api/materia/${this.materiaId}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.auth.getAccessTokenSilently()}`
+      });
       this.http.get(apiUrl).subscribe(
         (data) => {
           console.log(data); // Handle the response data
@@ -24,21 +40,6 @@ export class HomePage {
         }
       );
     }
-  }
-
-  getData() {
-    return this.http.get(environment.apiBaseUrl + '/api/data');
-  }
-
-  getDataFromAPI() {
-    this.getData().subscribe(
-      (data) => {
-        console.log(data); // Handle the response data
-      },
-      (error) => {
-        console.error(error); // Handle any errors
-      }
-    );
   }
 
   // make a post request to create a new Materia, the schema in python is:
