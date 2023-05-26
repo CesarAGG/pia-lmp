@@ -1,12 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Materia</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="materia; else loadingTemplate">
     <ion-card>
@@ -18,6 +9,21 @@
       <ion-card-content>
         <p>Horario: {{ materia.horario }}</p>
         <!-- Display other relevant information from the 'materia' object -->
+
+        <ion-list *ngIf="materia.evaluaciones.length > 0">
+          <ion-item>
+            <ion-label>Evaluaciones:</ion-label>
+          </ion-item>
+          <ion-item *ngFor="let evaluacion of materia.evaluaciones">
+            <ion-label>{{ evaluacion.nombre }}</ion-label>
+            <ion-label slot="end">{{ evaluacion.ptObtenidos }} / {{ evaluacion.ptPosibles }}</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-item *ngIf="materia.evaluaciones.length > 0">
+          <ion-label>Total:</ion-label>
+          <ion-label slot="end">{{ calcularTotalPuntosObtenidos() }} / {{ calcularTotalPuntosPosibles() }}</ion-label>
+        </ion-item>
       </ion-card-content>
     </ion-card>
   </ng-container>
