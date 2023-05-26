@@ -11,10 +11,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthModule } from '@auth0/auth0-angular';
-import { FilterByTipoPipe } from './filter-by-tipo.pipe';
 
 @NgModule({
-  declarations: [AppComponent, MateriaModalComponent, FilterByTipoPipe],
+  declarations: [AppComponent, MateriaModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule,
     AuthModule.forRoot({
       domain: 'dev-jwbsycv13ur5aut7.us.auth0.com',
