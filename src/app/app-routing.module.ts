@@ -1,11 +1,5 @@
-import { NgModule, OnInit, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { MateriaCardComponent } from './materia-card/materia-card.component';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common'; // Importar el módulo CommonModule
-
-
-
 
 const routes: Routes = [
   {
@@ -18,17 +12,18 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-  path: 'materia',
-  component: MateriaCardComponent,
-  pathMatch: 'full'
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'callback',
+    loadChildren: () => import('./callback/callback.module').then( m => m.CallbackPageModule)
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-    IonicModule,
-    CommonModule // Agregar el módulo a imports
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
