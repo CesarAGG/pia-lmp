@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { AuthService } from '@auth0/auth0-angular';
 import { switchMap, filter } from 'rxjs/operators';
 import { Materia } from './interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CrudService {
       switchMap(token => {
         if (token) {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-          return this.http.get(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers });
+          return this.http.get(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers }) as Observable<Materia>;
         } else {
           throw new Error('User is not authenticated');
         }
@@ -33,7 +34,7 @@ export class CrudService {
           switchMap(token => {
             if (token) {
               const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-              return this.http.get(`${environment.apiBaseUrl}/api/materias/${user!.sub}`, { headers });
+              return this.http.get(`${environment.apiBaseUrl}/api/materias/${user!.sub}`, { headers }) as Observable<Materia[]>;
             } else {
               throw new Error('User is not authenticated');
             }

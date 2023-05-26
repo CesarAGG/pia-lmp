@@ -36,7 +36,8 @@ export class MateriaModalComponent implements OnInit {
       nombre: [evaluacion ? evaluacion.nombre : '', Validators.required],
       tipo: [evaluacion ? evaluacion.tipo : '', Validators.required],
       ptObtenidos: [-1, [Validators.min(-1), Validators.max(100)]],
-      ptPosibles: [evaluacion ? evaluacion.ptPosibles : '', Validators.required]
+      ptPosibles: [evaluacion ? evaluacion.ptPosibles : '', Validators.required],
+      completado: [false]
     }));
   }
 

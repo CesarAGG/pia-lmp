@@ -34,6 +34,13 @@
             <ion-label>Add New Materia</ion-label>
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false" *ngIf="(auth.isAuthenticated$ | async) && router.url.includes('/materia/')">
+          <ion-item (click)="presentUpdateModal()">
+            <ion-icon name="create"></ion-icon>
+            <ion-label>Update Materia</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
       </ion-list>
     </ion-content>
   </ion-menu>
