@@ -1,7 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Materia, Evaluacion } from '../interfaces';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common'; // Importar el módulo CommonModule
 
 @Component({
   selector: 'app-materia-card',
@@ -38,8 +36,3 @@ export class MateriaCardComponent implements OnInit {
   }
 }
 
-@NgModule({
-  declarations: [MateriaCardComponent],
-  imports: [IonicModule, CommonModule],
-})
-export class MateriaCardModule {}

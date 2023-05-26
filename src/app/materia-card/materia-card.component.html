@@ -30,9 +30,11 @@
         </ion-col>
         <ion-col>
           <ion-label>{{ evaluacion.PO }}%</ion-label>
+          <ion-progress-bar [value]="evaluacion.PO" color="primary"></ion-progress-bar>
         </ion-col>
         <ion-col>
           <ion-label>{{ evaluacion.PP }}%</ion-label>
+          <ion-progress-bar [value]="evaluacion.PP" color="secondary"></ion-progress-bar>
         </ion-col>
       </ion-row>
     </ion-grid>
