@@ -1,34 +1,62 @@
 import { Component } from '@angular/core';
 import { CrudService } from '../crud.service';
+import { Materia } from '../interfaces';
+import { Observable } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  materias$: Observable<Materia[]>;
+  isLoggedIn = false;
 
+  constructor(private crud: CrudService, private auth: AuthService) { }
+
+  ngOnInit() {
+    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isLoggedIn = isAuthenticated;
+      if (isAuthenticated) {
+        this.materias$ = this.crud.getAllMaterias() as Observable<Materia[]>;
+      }
+    });
+  }
+
+  // all the code below is for testing and should be removed before production
   materiaId: string;
   testMateria = {
-    Nombre: 'Materia 1',
-    Profe: 'Profe 1',
-    Horario: 'Horario 1',
-    Evaluaciones: [
+    userId: 'testUserId',
+    id: 'adsdasdadasd',
+    salon: 'Salon 1',
+    pase: 70,
+    nombre: 'Materia 1',
+    profe: 'Profe 1',
+    horario: 'Horario 1',
+    evaluaciones: [
       {
-        Nombre: 'Evaluacion 1',
-        Tipo: 'Tipo 1',
-        Ptos_obtenidos: 1,
-        Ptos_posibles: 1
+        nombre: 'Evaluacion 1',
+        tipo: 'Tipo 1',
+        ptObtenidos: 1,
+        ptPosibles: 1,
+        completado: true
       },
       {
-        Nombre: 'Evaluacion 2',
-        Tipo: 'Tipo 2',
-        Ptos_obtenidos: 2,
-        Ptos_posibles: 2
+        nombre: 'Evaluacion 2',
+        tipo: 'Tipo 2',
+        ptObtenidos: 16,
+        ptPosibles: 20,
+        completado: true
+      },
+      {
+        nombre: 'Evaluacion 3',
+        tipo: 'Tipo 3',
+        ptObtenidos: 0,
+        ptPosibles: 10,
+        completado: false
       }
     ]
   };
-
-  constructor(private crud: CrudService) { }
 
   // test functions
 

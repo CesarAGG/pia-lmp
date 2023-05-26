@@ -1,12 +1,16 @@
 export interface Evaluacion {
   nombre: string;
   tipo: string;
-  PO: number;
-  PP: number;
+  ptObtenidos: number | null;
+  ptPosibles: number;
+  completado: boolean;
 }
 
 export interface Materia {
-  ID: number;
+  userId?: string;
+  id?: string;
+  salon: string;
+  pase: number;
   nombre: string;
   profe: string;
   horario: string;

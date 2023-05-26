@@ -1,8 +1,10 @@
 <ion-app>
   <ion-menu side="end" contentId="main-content">
-    <ion-header>
-      dgdfgdgdfgs
-    </ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Menú
+      </ion-title>
+    </ion-toolbar>
 
     <ion-content>
       <ion-list>
@@ -22,7 +24,16 @@
             <ion-label>Login</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <!-- Other menu items -->
+        <ion-item *ngIf="router.url !== '/home'" [routerLink]="'/home'">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+        <ion-menu-toggle auto-hide="false" *ngIf="(auth.isAuthenticated$ | async) && router.url === '/home'">
+          <ion-item (click)="presentAddModal()">
+            <ion-icon name="add-circle"></ion-icon>
+            <ion-label>Add New Materia</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>

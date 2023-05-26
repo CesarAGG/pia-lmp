@@ -1,19 +1,33 @@
 .progress-bar-container {
   width: 100%;
   height: 20px;
-  background-color: #c40707;
+  background-color: #7c7c7c;
   position: relative;
   border-radius: 4px;
-  overflow: hidden;
 }
 
-.progress-bar-value {
+.progress-bar-gained {
   height: 100%;
   background-color: #023258;
-  position: relative;
+  position: absolute;
+  left: 0;
 }
 
-.bar-text {
+.progress-bar-lost {
+  height: 100%;
+  background-color: red;
+  position: absolute;
+  right: 0;
+}
+
+.progress-bar-pase {
+  height: 100%;
+  width: 2px;
+  background-color: white;
+  position: absolute;
+}
+
+.gained-text {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -22,14 +36,10 @@
   font-size: 12px;
 }
 
-.points-possible {
+.lost-text {
+  position: absolute;
   right: 0;
-}
-
-.red-text {
-  color: red;
-}
-
-.blue-text {
-  color: blue;
+  color: rgb(255, 255, 255);
+  padding: 0 8px;
+  font-size: 12px;
 }

@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
+import { MateriaCardComponent } from '../materia-card/materia-card.component';
+
 import { HomePageRoutingModule } from './home-routing.module';
 
 
@@ -14,6 +16,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, MateriaCardComponent]
 })
-export class HomePageModule {}
+export class HomePageModule { }

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add new Materia</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="materiaForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <div *ngIf="materiaForm.get('nombre')!.touched && materiaForm.get('nombre')!.errors" class="error-message">
+      <ion-label color="danger">Nombre is required</ion-label>
+    </div>
+
+    <!-- Add similar fields for profe, horario, salon, pase -->
+    <ion-item>
+      <ion-label position="floating">Profe</ion-label>
+      <ion-input formControlName="profe"></ion-input>
+    </ion-item>
+    <div *ngIf="materiaForm.get('profe')!.touched && materiaForm.get('profe')!.errors">
+      <ion-label color="danger">Profe is required.</ion-label>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Horario</ion-label>
+      <ion-input formControlName="horario"></ion-input>
+    </ion-item>
+    <div *ngIf="materiaForm.get('horario')!.touched && materiaForm.get('horario')!.errors">
+      <ion-label color="danger">Horario is required to follow a format like LXV 13:00.</ion-label>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Salon</ion-label>
+      <ion-input formControlName="salon"></ion-input>
+    </ion-item>
+    <div *ngIf="materiaForm.get('salon')!.touched && materiaForm.get('salon')!.errors">
+      <ion-label color="danger">Salon is required.</ion-label>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Pase</ion-label>
+      <ion-input formControlName="pase" type="number" step="0.01" min="0" max="100"></ion-input>
+    </ion-item>
+    <div *ngIf="materiaForm.get('pase')!.touched && materiaForm.get('pase')!.errors">
+      <ion-label color="danger">Pase is required and must be between 1 and 100.</ion-label>
+    </div>
+
+    <ion-list>
+      <ion-list-header>Evaluaciones</ion-list-header>
+      <ion-item-group formArrayName="evaluaciones">
+        <ion-item *ngFor="let evaluacion of evaluaciones.controls; let i=index" [formGroupName]="i">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre" type="text"></ion-input>
+
+          <ion-label position="floating">Tipo</ion-label>
+          <ion-select formControlName="tipo">
+            <ion-select-option value="tarea">Tarea</ion-select-option>
+            <ion-select-option value="examen">Examen</ion-select-option>
+            <ion-select-option value="proyecto">Proyecto</ion-select-option>
+            <ion-select-option value="otro">Otro</ion-select-option>
+          </ion-select>
+
+          <ion-label position="floating">Puntos Obtenidos (-1 si no esta completada)</ion-label>
+          <ion-input formControlName="ptObtenidos" type="number" step="0.01" min="0" max="100"></ion-input>
+
+          <ion-label position="floating">Puntos Posibles</ion-label>
+          <ion-input formControlName="ptPosibles" type="number" step="0.01" min="0" max="100"></ion-input>
+        </ion-item>
+        <ion-button expand="full" fill="outline" (click)="addEvaluacion()">Add Evaluacion</ion-button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-button expand="full" type="submit" [disabled]="!materiaForm.valid">Submit</ion-button>
+  </form>
+</ion-content>

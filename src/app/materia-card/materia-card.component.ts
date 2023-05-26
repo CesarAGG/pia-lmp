@@ -1,45 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Materia, Evaluacion } from '../interfaces';
+import { Component, Input } from '@angular/core';
+import { Materia } from '../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-materia-card',
   templateUrl: './materia-card.component.html',
   styleUrls: ['./materia-card.component.scss'],
 })
-export class MateriaCardComponent implements OnInit {
-  materia: Materia = {
-    ID: 1,
-    nombre: 'Matemáticas',
-    profe: 'Tenorio Rigoberto',
-    horario: 'Lunes 9:00 - 11:00',
-    evaluaciones: [],
-  };
+export class MateriaCardComponent {
+  @Input() materia: Materia;
 
-  constructor() {}
+  constructor(private router: Router) { }
 
-  ngOnInit() {
-    // Generar datos de prueba para la materia y evaluaciones
-    this.materia.evaluaciones = [
-      {
-        nombre: 'Examen 1',
-        tipo: 'Parcial',
-        PO: 60,
-        PP: 30,
-      },
-      {
-        nombre: 'Proyecto',
-        tipo: 'Final',
-        PO: 30,
-        PP: 70,
-      },
-    ];
+  navigateToMateria() {
+    this.router.navigate(['/materia', this.materia.id]);
   }
-  calcularProgreso(): { totalPO: number; totalPP: number; sumPO: boolean; sumPP: boolean } {
-    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + evaluacion.PO, 0);
-    const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + evaluacion.PP, 0);
-    const sumPO = this.materia.evaluaciones.some(evaluacion => evaluacion.PO > 0);
-    const sumPP = this.materia.evaluaciones.some(evaluacion => evaluacion.PP > 0);
-    return { totalPO, totalPP, sumPO, sumPP };
+
+  calcularProgreso(): { totalPtObtenidos: number, totalPtPerdidos: number } {
+    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.ptObtenidos ?? 0), 0);
+    const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.completado ? evaluacion.ptPosibles : 0), 0);
+    const totalPPerdidos = totalPP - totalPO;
+    return { totalPtObtenidos: totalPO, totalPtPerdidos: totalPPerdidos };
   }
 }
 

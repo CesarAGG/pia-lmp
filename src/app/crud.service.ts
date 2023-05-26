@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from '@auth0/auth0-angular';
 import { switchMap, filter } from 'rxjs/operators';
+import { Materia } from './interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class CrudService {
     );
   }
 
-  createMateria(materia: any) {
+  createMateria(materia: Materia) {
     return this.auth.getAccessTokenSilently().pipe(
       switchMap(token => {
         if (token) {
@@ -55,7 +56,7 @@ export class CrudService {
     );
   }
 
-  updateMateria(materiaId: string, updatedMateria: any) {
+  updateMateria(materiaId: string, updatedMateria: Materia) {
     return this.auth.getAccessTokenSilently().pipe(
       switchMap(token => {
         if (token) {
