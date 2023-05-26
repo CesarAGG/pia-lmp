@@ -44,5 +44,23 @@ export class MateriaPage implements OnInit {
     toast.present();
     this.router.navigate(['/home']);
   }
+  calcularTotalPuntosObtenidos(): number {
+    if (this.materia && this.materia.evaluaciones.length > 0) {
+      return this.materia.evaluaciones.reduce(
+        (acumulador, evaluacion) => acumulador + (evaluacion.ptObtenidos || 0),
+        0
+      );
+    }
+    return 0;
+  }
 
+  calcularTotalPuntosPosibles(): number {
+    if (this.materia && this.materia.evaluaciones.length > 0) {
+      return this.materia.evaluaciones.reduce(
+        (acumulador, evaluacion) => acumulador + evaluacion.ptPosibles,
+        0
+      );
+    }
+    return 0;
+  }
 }
