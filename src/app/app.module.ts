@@ -17,6 +17,8 @@ import { AuthModule } from '@auth0/auth0-angular';
       domain: 'dev-jwbsycv13ur5aut7.us.auth0.com',
       clientId: 'AAkIPAAVXaGcqcCOmp6siijSF5MezFju',
       authorizationParams: {
+        audience: 'https://dev-jwbsycv13ur5aut7.us.auth0.com/api/v2/',
+        scope: 'openid profile email',
         redirect_uri: window.location.origin
       }
     }),],
