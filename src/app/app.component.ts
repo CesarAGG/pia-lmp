@@ -4,9 +4,8 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { MateriaModalComponent } from './materia-modal/materia-modal.component';
 import { CrudService } from './crud.service';
-import { Materia } from './interfaces';
 import { filter, map, mergeMap } from 'rxjs/operators';
-
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,13 @@ import { filter, map, mergeMap } from 'rxjs/operators';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(public auth: AuthService, private route: ActivatedRoute, private crudService: CrudService, public router: Router, public modalController: ModalController) {
+  constructor(public auth: AuthService,
+    private route: ActivatedRoute,
+    private crudService: CrudService,
+    public router: Router,
+    public modalController: ModalController,
+    private menuController: MenuController
+  ) {
 
   }
 
@@ -32,6 +37,12 @@ export class AppComponent implements OnInit {
       mergeMap(route => route.params),
     ).subscribe(params => {
       this.materiaId = params['id'] || null;
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.menuController.close(); // Close the menu after navigating to a new route
+      }
     });
   }
 
