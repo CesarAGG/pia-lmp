@@ -33,22 +33,4 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
-
-
-  <ion-item>
-    <ion-label position="floating">Materia ID</ion-label>
-    <ion-input [(ngModel)]="materiaId" type="text"></ion-input>
-  </ion-item>
-
-  <ion-button (click)="getMateriaFromAPI()" expand="block" fill="clear" shape="round">
-    Get Materia by ID
-  </ion-button>
-  <ion-button (click)="postDataToAPI()" expand="block" fill="clear" shape="round">
-    Click me 2
-  </ion-button>
-  <ion-button (click)="getDataFromAPI()" expand="block" fill="clear" shape="round">
-    Click me 3
-  </ion-button>
-
-  <app-materia-card [materia]="testMateria"></app-materia-card>
 </ion-content>
