@@ -1,4 +1,4 @@
 export const environment = {
-  apiBaseUrl: 'https://pia-lmp-backend.vercel.app',
+  apiBaseUrl: 'https://pia-lmp-back.azurewebsites.net/api/data',
   production: true
 };
