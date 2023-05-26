@@ -1,0 +1,35 @@
+.progress-bar-container {
+  width: 100%;
+  height: 20px;
+  background-color: #c40707;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-value {
+  height: 100%;
+  background-color: #023258;
+  position: relative;
+}
+
+.bar-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.points-possible {
+  right: 0;
+}
+
+.red-text {
+  color: red;
+}
+
+.blue-text {
+  color: blue;
+}
