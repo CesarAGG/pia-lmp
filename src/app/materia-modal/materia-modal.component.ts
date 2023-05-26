@@ -35,7 +35,7 @@ export class MateriaModalComponent implements OnInit {
     this.evaluaciones.push(this.fb.group({
       nombre: [evaluacion ? evaluacion.nombre : '', Validators.required],
       tipo: [evaluacion ? evaluacion.tipo : '', Validators.required],
-      ptObtenidos: [-1, [Validators.min(-1), Validators.max(100)]],
+      ptObtenidos: [evaluacion?.ptObtenidos ? evaluacion.ptObtenidos : -1, [Validators.min(-1), Validators.max(100)]],
       ptPosibles: [evaluacion ? evaluacion.ptPosibles : '', Validators.required],
       completado: [false]
     }));

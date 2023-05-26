@@ -9,46 +9,55 @@
 
 <ion-content padding>
   <form [formGroup]="materiaForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Profe</ion-label>
-      <ion-input formControlName="profe"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Horario</ion-label>
-      <ion-input formControlName="horario"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Salon</ion-label>
-      <ion-input formControlName="salon"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Pase</ion-label>
-      <ion-input formControlName="pase" type="number" step="0.01" min="0" max="100"></ion-input>
-    </ion-item>
+    <ion-list>
+      <ion-list-header>Información de Materia</ion-list-header>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Profe</ion-label>
+        <ion-input formControlName="profe"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Horario</ion-label>
+        <ion-input formControlName="horario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Salon</ion-label>
+        <ion-input formControlName="salon"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Pase</ion-label>
+        <ion-input formControlName="pase" type="number" step="0.01" min="0" max="100"></ion-input>
+      </ion-item>
+    </ion-list>
+
     <ion-list>
       <ion-list-header>Evaluaciones</ion-list-header>
       <ion-item-group formArrayName="evaluaciones">
-        <ion-item *ngFor="let evaluacion of evaluaciones.controls; let i=index" [formGroupName]="i">
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName="nombre" type="text"></ion-input>
+        <ion-item *ngFor="let evaluacion of evaluaciones.controls; let i=index">
+          <div class="evaluacion-header">
+            <ion-label>Evaluacion {{ i + 1 }}</ion-label>
+          </div>
+          <ion-item [formGroupName]="i">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre" type="text"></ion-input>
 
-          <ion-label position="floating">Tipo</ion-label>
-          <ion-select formControlName="tipo">
-            <ion-select-option value="tarea">Tarea</ion-select-option>
-            <ion-select-option value="examen">Examen</ion-select-option>
-            <ion-select-option value="proyecto">Proyecto</ion-select-option>
-            <ion-select-option value="otro">Otro</ion-select-option>
-          </ion-select>
+            <ion-label position="floating">Tipo</ion-label>
+            <ion-select formControlName="tipo">
+              <ion-select-option value="tarea">Tarea</ion-select-option>
+              <ion-select-option value="examen">Examen</ion-select-option>
+              <ion-select-option value="proyecto">Proyecto</ion-select-option>
+              <ion-select-option value="otro">Otro</ion-select-option>
+            </ion-select>
 
-          <ion-label position="floating">Puntos Obtenidos (-1 si no esta completada)</ion-label>
-          <ion-input formControlName="ptObtenidos" type="number" step="0.01" min="0" max="100"></ion-input>
+            <ion-label position="floating">Puntos Obtenidos (-1 si no esta completada)</ion-label>
+            <ion-input formControlName="ptObtenidos" type="number" step="0.01" min="0" max="100"></ion-input>
 
-          <ion-label position="floating">Puntos Posibles</ion-label>
-          <ion-input formControlName="ptPosibles" type="number" step="0.01" min="0" max="100"></ion-input>
+            <ion-label position="floating">Puntos Posibles</ion-label>
+            <ion-input formControlName="ptPosibles" type="number" step="0.01" min="0" max="100"></ion-input>
+          </ion-item>
         </ion-item>
         <ion-button expand="full" fill="outline" (click)="addEvaluacion()">Add Evaluacion</ion-button>
       </ion-item-group>
