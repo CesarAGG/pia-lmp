@@ -15,7 +15,7 @@ export class HomePage {
   constructor(private crud: CrudService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+    this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       this.isLoggedIn = isAuthenticated;
       if (isAuthenticated) {
         this.materias$ = this.crud.getAllMaterias() as Observable<Materia[]>;

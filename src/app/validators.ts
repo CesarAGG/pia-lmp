@@ -43,7 +43,7 @@ export function materiaValidator(): ValidatorFn {
         }
 
         // Validate 'horario' field
-        if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?[0-9]|2[0-3]):[0-5][0-9])$/.test(materia.horario.trim())) {
+        if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?\d|2[0-3]):[0-5]\d)$/.test(materia.horario.trim())) {
             errors['horario'] = 'Horario is required. Please provide a valid format (e.g., LXV 13:00).';
         }
 
@@ -107,7 +107,7 @@ export function ptPosiblesSumValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const evaluaciones: Evaluacion[] = control.value;
         let sum = 0;
-        for (let evaluacion of evaluaciones) {
+        for (const evaluacion of evaluaciones) {
             sum += evaluacion.ptPosibles;
         }
         if (sum > 100) {

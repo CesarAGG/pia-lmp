@@ -23,10 +23,10 @@ export class MateriaPage implements OnInit {
 
   async fetchMateria() {
     this.crud.getMateria(this.materiaId).subscribe(
-      (materia) => {
+      materia => {
         this.materia = materia as Materia;
       },
-      (error) => {
+      error => {
         console.error('Failed to fetch materia', error);
         this.error = `Failed to fetch materia: ${error.message}`;
         this.presentToast(this.error);

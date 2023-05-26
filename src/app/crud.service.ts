@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from '@auth0/auth0-angular';
 import { switchMap, filter } from 'rxjs/operators';
-import { Materia } from './interfaces'
+import { Materia } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
