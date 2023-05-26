@@ -76,6 +76,9 @@ export class MateriaModalComponent implements OnInit {
       materia.evaluaciones.forEach(evaluacion => {
         if (evaluacion.ptObtenidos === -1) {
           evaluacion.ptObtenidos = null;
+          evaluacion.completado = false;
+        } else {
+          evaluacion.completado = true;
         }
       });
       if (this.materia) {
