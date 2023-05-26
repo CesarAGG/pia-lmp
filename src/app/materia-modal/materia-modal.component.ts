@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Materia, Evaluacion } from '../interfaces';
-import { materiaValidator } from '../validators';
+import { materiaValidator, ptPosiblesSumValidator } from '../validators';
 import { CrudService } from '../crud.service';
 
 @Component({
@@ -22,8 +22,9 @@ export class MateriaModalComponent implements OnInit {
       horario: ['', Validators.required],
       salon: ['', Validators.required],
       pase: ['', Validators.required],
-      evaluaciones: this.fb.array([])
+      evaluaciones: this.fb.array([], ptPosiblesSumValidator())
     }, { validators: materiaValidator() });
+
   }
 
   get evaluaciones() {
@@ -66,7 +67,9 @@ export class MateriaModalComponent implements OnInit {
   }
 
   dismissModal() {
-    this.modalController.dismiss();
+    this.modalController.dismiss().then(() => {
+      window.location.reload();
+    });
   }
 
   onSubmit() {

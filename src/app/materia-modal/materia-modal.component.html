@@ -13,43 +13,22 @@
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
-    <div *ngIf="materiaForm.get('nombre')!.touched && materiaForm.get('nombre')!.errors" class="error-message">
-      <ion-label color="danger">Nombre is required</ion-label>
-    </div>
-
-    <!-- Add similar fields for profe, horario, salon, pase -->
     <ion-item>
       <ion-label position="floating">Profe</ion-label>
       <ion-input formControlName="profe"></ion-input>
     </ion-item>
-    <div *ngIf="materiaForm.get('profe')!.touched && materiaForm.get('profe')!.errors">
-      <ion-label color="danger">Profe is required.</ion-label>
-    </div>
-
     <ion-item>
       <ion-label position="floating">Horario</ion-label>
       <ion-input formControlName="horario"></ion-input>
     </ion-item>
-    <div *ngIf="materiaForm.get('horario')!.touched && materiaForm.get('horario')!.errors">
-      <ion-label color="danger">Horario is required to follow a format like LXV 13:00.</ion-label>
-    </div>
-
     <ion-item>
       <ion-label position="floating">Salon</ion-label>
       <ion-input formControlName="salon"></ion-input>
     </ion-item>
-    <div *ngIf="materiaForm.get('salon')!.touched && materiaForm.get('salon')!.errors">
-      <ion-label color="danger">Salon is required.</ion-label>
-    </div>
-
     <ion-item>
       <ion-label position="floating">Pase</ion-label>
       <ion-input formControlName="pase" type="number" step="0.01" min="0" max="100"></ion-input>
     </ion-item>
-    <div *ngIf="materiaForm.get('pase')!.touched && materiaForm.get('pase')!.errors">
-      <ion-label color="danger">Pase is required and must be between 1 and 100.</ion-label>
-    </div>
-
     <ion-list>
       <ion-list-header>Evaluaciones</ion-list-header>
       <ion-item-group formArrayName="evaluaciones">
@@ -73,6 +52,50 @@
         </ion-item>
         <ion-button expand="full" fill="outline" (click)="addEvaluacion()">Add Evaluacion</ion-button>
       </ion-item-group>
+      <div *ngIf="materiaForm.controls['evaluaciones'].errors?.hasOwnProperty('ptPosiblesSum') 
+          && materiaForm.controls['evaluaciones'].touched">
+        <ion-item>
+          <ion-label color="danger">Total points possible across all evaluations should not exceed 100.</ion-label>
+        </ion-item>
+      </div>
+      <div *ngIf="materiaForm.errors && materiaForm.touched">
+        <ion-item *ngIf="materiaForm.errors['id']">
+          <ion-label color="danger">{{ materiaForm.errors['id'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['salon']">
+          <ion-label color="danger">{{ materiaForm.errors['salon'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['pase']">
+          <ion-label color="danger">{{ materiaForm.errors['pase'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['nombre']">
+          <ion-label color="danger">{{ materiaForm.errors['nombre'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['profe']">
+          <ion-label color="danger">{{ materiaForm.errors['profe'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['horario']">
+          <ion-label color="danger">{{ materiaForm.errors['horario'] }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="materiaForm.errors['evaluaciones']">
+          <ion-label color="danger">Errors in Evaluaciones:</ion-label>
+          <div *ngFor="let error of materiaForm.errors['evaluaciones']">
+            <ion-item *ngIf="error.nombre">
+              <ion-label color="danger">{{ error.nombre }}</ion-label>
+            </ion-item>
+            <ion-item *ngIf="error.tipo">
+              <ion-label color="danger">{{ error.tipo }}</ion-label>
+            </ion-item>
+            <ion-item *ngIf="error.ptObtenidos">
+              <ion-label color="danger">{{ error.ptObtenidos }}</ion-label>
+            </ion-item>
+            <ion-item *ngIf="error.ptPosibles">
+              <ion-label color="danger">{{ error.ptPosibles }}</ion-label>
+            </ion-item>
+          </div>
+        </ion-item>
+      </div>
+
     </ion-list>
 
     <ion-button expand="full" type="submit" [disabled]="!materiaForm.valid">Submit</ion-button>

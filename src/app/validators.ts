@@ -28,6 +28,9 @@ export function materiaValidator(): ValidatorFn {
         if (isNaN(materia.pase) || materia.pase < 0 || materia.pase > 100) {
             errors['pase'] = 'Invalid pase. Please provide a number between 0 and 100.';
         }
+        if (!materia.pase && materia.pase !== 0) {
+            errors['pase'] = 'Pase is required.';
+        }
 
         // Validate 'nombre' field
         if (!materia.nombre || materia.nombre.trim() === '') {
@@ -40,7 +43,7 @@ export function materiaValidator(): ValidatorFn {
         }
 
         // Validate 'horario' field
-        if (!materia.horario || !/^([LMXJVSD]{1,7}\s\d{2}:\d{2})$/.test(materia.horario.trim())) {
+        if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?[0-9]|2[0-3]):[0-5][0-9])$/.test(materia.horario.trim())) {
             errors['horario'] = 'Horario is required. Please provide a valid format (e.g., LXV 13:00).';
         }
 
@@ -69,10 +72,19 @@ export function materiaValidator(): ValidatorFn {
                 if (isNaN(evaluacion.ptObtenidos ?? 0) || (evaluacion.ptObtenidos ?? 0) < -1 || (evaluacion.ptObtenidos ?? 0) > 100) {
                     evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: Invalid ptObtenidos. Please provide a number between 0 and 100.`;
                 }
+                if (!evaluacion.ptObtenidos && evaluacion.ptObtenidos !== 0) {
+                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos is required.`;
+                }
+                if ((evaluacion.ptObtenidos ?? 0) > evaluacion.ptPosibles && evaluacion.ptPosibles) {
+                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos cannot be greater than PtPosibles.`;
+                }
 
                 // Validate 'ptPosibles' field of 'Evaluacion'
                 if (isNaN(evaluacion.ptPosibles) || evaluacion.ptPosibles < 0 || evaluacion.ptPosibles > 100) {
                     evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: Invalid ptPosibles. Please provide a number between 0 and 100.`;
+                }
+                if (!evaluacion.ptPosibles && evaluacion.ptPosibles !== 0) {
+                    evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: PtPosibles is required.`;
                 }
 
                 // Add 'Evaluacion' errors to the array
@@ -88,5 +100,19 @@ export function materiaValidator(): ValidatorFn {
         }
 
         return Object.keys(errors).length > 0 ? errors : null;
+    };
+}
+
+export function ptPosiblesSumValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const evaluaciones: Evaluacion[] = control.value;
+        let sum = 0;
+        for (let evaluacion of evaluaciones) {
+            sum += evaluacion.ptPosibles;
+        }
+        if (sum > 100) {
+            return { 'ptPosiblesSum': 'Total points possible across all evaluations should not exceed 100.' };
+        }
+        return null;
     };
 }
