@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MateriaPageRoutingModule } from './materia-routing.module';
 
+import { FilterByTipoPipe } from '../filter-by-tipo.pipe';
 import { MateriaPage } from './materia.page';
 
 @NgModule({
@@ -15,6 +16,6 @@ import { MateriaPage } from './materia.page';
     IonicModule,
     MateriaPageRoutingModule
   ],
-  declarations: [MateriaPage]
+  declarations: [MateriaPage, FilterByTipoPipe]
 })
 export class MateriaPageModule { }

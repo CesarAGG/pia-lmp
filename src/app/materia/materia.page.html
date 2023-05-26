@@ -13,24 +13,26 @@
       <ion-card-header>
         <ion-card-subtitle>{{ materia.profe }} - {{ materia.salon }}</ion-card-subtitle>
       </ion-card-header>
-
       <ion-card-content>
         <p>Horario: {{ materia.horario }}</p>
-        <!-- Display other relevant information from the 'materia' object -->
 
-        <ion-list *ngIf="materia.evaluaciones.length > 0">
-          <ion-item>
-            <ion-label>Evaluaciones:</ion-label>
-          </ion-item>
-          <ion-item *ngFor="let evaluacion of materia.evaluaciones">
-            <ion-label>{{ evaluacion.nombre }}</ion-label>
-            <ion-label slot="end">{{ evaluacion.ptObtenidos }} / {{ evaluacion.ptPosibles }}</ion-label>
-          </ion-item>
-        </ion-list>
+        <ng-container *ngFor="let tipo of ['examen', 'tarea', 'proyecto', 'otros']">
+          <ion-list *ngIf="materia.evaluaciones | filterByTipo: tipo as filteredEvaluaciones;"
+            [hidden]="filteredEvaluaciones.length === 0">
+            <ion-item>
+              <ion-label>{{ getTipoPlural(tipo) }}</ion-label>
+            </ion-item>
+            <ion-item *ngFor="let evaluacion of filteredEvaluaciones">
+              <ion-label>{{ evaluacion.nombre }}</ion-label>
+              <ion-label slot="end">{{ evaluacion.ptObtenidos }} / {{ evaluacion.ptPosibles }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-container>
 
         <ion-item *ngIf="materia.evaluaciones.length > 0">
           <ion-label>Total:</ion-label>
-          <ion-label slot="end">{{ calcularTotalPuntosObtenidos() }} / {{ calcularTotalPuntosPosibles() }}</ion-label>
+          <ion-label slot="end">{{ calcularProgreso().totalPtObtenidos }} / {{ calcularProgreso().totalPtPerdidos +
+            calcularProgreso().totalPtObtenidos }}</ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>

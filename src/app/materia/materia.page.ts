@@ -44,23 +44,27 @@ export class MateriaPage implements OnInit {
     toast.present();
     this.router.navigate(['/home']);
   }
-  calcularTotalPuntosObtenidos(): number {
-    if (this.materia && this.materia.evaluaciones.length > 0) {
-      return this.materia.evaluaciones.reduce(
-        (acumulador, evaluacion) => acumulador + (evaluacion.ptObtenidos || 0),
-        0
-      );
-    }
-    return 0;
+
+  calcularProgreso(): { totalPtObtenidos: number, totalPtPerdidos: number } {
+    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.ptObtenidos ?? 0), 0);
+    const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.completado ? evaluacion.ptPosibles : 0), 0);
+    const totalPPerdidos = totalPP - totalPO;
+    return { totalPtObtenidos: totalPO, totalPtPerdidos: totalPPerdidos };
   }
 
-  calcularTotalPuntosPosibles(): number {
-    if (this.materia && this.materia.evaluaciones.length > 0) {
-      return this.materia.evaluaciones.reduce(
-        (acumulador, evaluacion) => acumulador + evaluacion.ptPosibles,
-        0
-      );
+  getTipoPlural(tipo: string): string {
+    switch (tipo) {
+      case 'examen':
+        return 'EXÁMENES';
+      case 'tarea':
+        return 'TAREAS';
+      case 'proyecto':
+        return 'PROYECTOS';
+      case 'otro':
+        return 'OTROS';
+      default:
+        return '';
     }
-    return 0;
   }
+
 }
