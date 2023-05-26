@@ -1,0 +1,22 @@
+<ion-card (click)="navigateToMateria()">
+  <ion-card-header>
+    <ion-card-title>{{ materia.nombre }}</ion-card-title>
+    <ion-card-subtitle>{{ materia.profe }} - {{ materia.salon }} </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>Horario: {{ materia.horario }}</p>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar-gained" [style.width.%]="calcularProgreso().totalPtObtenidos">
+        <span class="gained-text">{{ calcularProgreso().totalPtObtenidos }}</span>
+      </div>
+      <div class="progress-bar-lost" [style.width.%]="calcularProgreso().totalPtPerdidos">
+        <span class="lost-text">{{ calcularProgreso().totalPtPerdidos }}</span>
+      </div>
+      <div class="progress-bar-pase" [style.left.%]="materia.pase">
+        <!-- Empty, as this is only used to display the pass threshold -->
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>
