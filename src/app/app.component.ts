@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, MenuController, AlertController } from '@ionic/angular';
 import { MateriaModalComponent } from './materia-modal/materia-modal.component';
 import { CrudService } from './crud.service';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +17,9 @@ export class AppComponent implements OnInit {
     private crudService: CrudService,
     public router: Router,
     public modalController: ModalController,
-    private menuController: MenuController
-  ) {
-
-  }
+    private menuController: MenuController,
+    private alertController: AlertController
+  ) { }
 
   materiaId: string | null = null;
 
@@ -66,5 +64,61 @@ export class AppComponent implements OnInit {
     }
   }
 
+  async presentDeleteAlert() {
+    if (this.materiaId) {
+      const alert = await this.alertController.create({
+        header: 'Confirm!',
+        message: 'Are you sure you want to delete this materia?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+          }, {
+            text: 'Okay',
+            handler: () => {
+              this.crudService.deleteMateria(this.materiaId!).subscribe(response => {
+                console.log('Delete response:', response);
+                this.router.navigate(['/']).then(() => {
+                  window.location.reload();
+                });
+              }, error => {
+                console.error('Delete error:', error);
+                // Add code to handle the error, e.g., showing a message to the user
+              });
+            }
+          }
+        ]
+      });
 
+      await alert.present();
+    }
+  }
+
+  async presentDeleteAllAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete all materias?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.crudService.deleteAllMaterias().subscribe(response => {
+              console.log('Delete all response:', response);
+              window.location.reload();
+            }, error => {
+              console.error('Delete all error:', error);
+              // Add code to handle the error, e.g., showing a message to the user
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

@@ -40,7 +40,18 @@
             <ion-label>Update Materia</ion-label>
           </ion-item>
         </ion-menu-toggle>
-
+        <ion-menu-toggle auto-hide="false" *ngIf="(auth.isAuthenticated$ | async) && router.url.includes('/materia/')">
+          <ion-item (click)="presentDeleteAlert()">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>Delete Materia</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false" *ngIf="(auth.isAuthenticated$ | async) && router.url === '/home'">
+          <ion-item (click)="presentDeleteAllAlert()">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>Delete All Materias</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>
