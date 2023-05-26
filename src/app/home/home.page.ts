@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,7 +11,7 @@ export class HomePage {
   constructor(private http: HttpClient) { }
 
   getData() {
-    return this.http.get('/api/data');
+    return this.http.get(environment.apiBaseUrl + '/api/data');
   }
 
   getDataFromAPI() {
