@@ -10,7 +10,7 @@ export class MateriaCardComponent implements OnInit {
   materia: Materia = {
     ID: 1,
     nombre: 'Matemáticas',
-    profe: 'Juan Pérez',
+    profe: 'Tenorio Rigoberto',
     horario: 'Lunes 9:00 - 11:00',
     evaluaciones: [],
   };
@@ -24,7 +24,7 @@ export class MateriaCardComponent implements OnInit {
         nombre: 'Examen 1',
         tipo: 'Parcial',
         PO: 60,
-        PP: 40,
+        PP: 30,
       },
       {
         nombre: 'Proyecto',
@@ -33,6 +33,13 @@ export class MateriaCardComponent implements OnInit {
         PP: 70,
       },
     ];
+  }
+  calcularProgreso(): { totalPO: number; totalPP: number; sumPO: boolean; sumPP: boolean } {
+    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + evaluacion.PO, 0);
+    const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + evaluacion.PP, 0);
+    const sumPO = this.materia.evaluaciones.some(evaluacion => evaluacion.PO > 0);
+    const sumPP = this.materia.evaluaciones.some(evaluacion => evaluacion.PP > 0);
+    return { totalPO, totalPP, sumPO, sumPP };
   }
 }
 

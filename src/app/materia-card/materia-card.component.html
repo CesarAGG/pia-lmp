@@ -1,3 +1,4 @@
+<!-- Generado por: angular-cli 
 <ion-card>
   <ion-card-header>
     <ion-card-title>{{ materia.nombre }}</ion-card-title>
@@ -26,17 +27,45 @@
           <ion-label>{{ evaluacion.nombre }}</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{ evaluacion.tipo }}</ion-label>
+        <ion-label>{{ evaluacion.tipo }}</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{ evaluacion.PO }}%</ion-label>
-          <ion-progress-bar [value]="evaluacion.PO" color="primary"></ion-progress-bar>
+        <ion-label>{{ evaluacion.PO }}%</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{ evaluacion.PP }}%</ion-label>
-          <ion-progress-bar [value]="evaluacion.PP" color="secondary"></ion-progress-bar>
+        <ion-label>{{ evaluacion.PP }}%</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="progress-bar-container">
+            <div class="progress-bar-value" [style.width.%]="calcularProgreso().totalPO">
+              <span class="bar-text">{{ calcularProgreso().totalPO }}</span>
+            </div>
+            <span class="bar-text points-possible">{{ calcularProgreso().totalPP }}</span>
+          </div>
+  </ion-card-content>
+</ion-card>
+-->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ materia.nombre }}</ion-card-title>
+    <ion-card-subtitle>{{ materia.profe }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>Horario: {{ materia.horario }}</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+    <div class="progress-bar-container">
+            <div class="progress-bar-value" [style.width.%]="calcularProgreso().totalPO">
+              <span class="bar-text">{{ calcularProgreso().totalPO }}</span>
+            </div>
+            <span class="bar-text points-possible">{{ calcularProgreso().totalPP }}</span>
+          </div>
   </ion-card-content>
 </ion-card>
