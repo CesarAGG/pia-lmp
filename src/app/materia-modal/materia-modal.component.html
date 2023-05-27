@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add new Materia</ion-title>
+    <ion-title>Añadir/Modificar Materia</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -64,7 +64,7 @@
       <div *ngIf="materiaForm.controls['evaluaciones'].errors?.hasOwnProperty('ptPosiblesSum') 
           && materiaForm.controls['evaluaciones'].touched">
         <ion-item>
-          <ion-label color="danger">Total points possible across all evaluations should not exceed 100.</ion-label>
+          <ion-label color="danger">El total de los puntos posibles no debe pasar de 100.</ion-label>
         </ion-item>
       </div>
       <div *ngIf="materiaForm.errors && materiaForm.touched">
@@ -107,6 +107,6 @@
 
     </ion-list>
 
-    <ion-button expand="full" type="submit" [disabled]="!materiaForm.valid">Submit</ion-button>
+    <ion-button expand="full" type="submit" [disabled]="!materiaForm.valid">Listo</ion-button>
   </form>
 </ion-content>

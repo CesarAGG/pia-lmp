@@ -67,15 +67,15 @@ export class AppComponent implements OnInit {
   async presentDeleteAlert() {
     if (this.materiaId) {
       const alert = await this.alertController.create({
-        header: 'Confirm!',
-        message: 'Are you sure you want to delete this materia?',
+        header: 'Confirmar',
+        message: '¿Estás seguro de querer eliminar esta materia?',
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel',
             cssClass: 'secondary',
           }, {
-            text: 'Okay',
+            text: 'OK',
             handler: () => {
               this.crudService.deleteMateria(this.materiaId!).subscribe(response => {
                 console.log('Delete response:', response);
@@ -97,15 +97,15 @@ export class AppComponent implements OnInit {
 
   async presentDeleteAllAlert() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Are you sure you want to delete all materias?',
+      header: 'Confirmar',
+      message: '¿Estás seguro de querer eliminar todas tus materias?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
         }, {
-          text: 'Okay',
+          text: 'OK',
           handler: () => {
             this.crudService.deleteAllMaterias().subscribe(response => {
               console.log('Delete all response:', response);

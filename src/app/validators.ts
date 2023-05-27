@@ -15,41 +15,41 @@ export function materiaValidator(): ValidatorFn {
         if (materia.id) {
             const idPattern = /^[0-9a-fA-F]{24}$/; // 24 character hex string pattern
             if (!idPattern.test(materia.id.toString())) {
-                errors['id'] = 'Invalid ID. Please provide a 24 character hex string.';
+                errors['id'] = 'ID invalido. Por favor provee una cadena de 24 caracteres hexadecimales.';
             }
         }
 
         // Validate 'salon' field
         if (!materia.salon || materia.salon.trim() === '') {
-            errors['salon'] = 'Salon is required. Please provide a non-empty string.';
+            errors['salon'] = 'Salon es requerido. Por favor provee una cadena no vacia.';
         }
 
         // Validate 'pase' field
         if (isNaN(materia.pase) || materia.pase < 0 || materia.pase > 100) {
-            errors['pase'] = 'Invalid pase. Please provide a number between 0 and 100.';
+            errors['pase'] = 'Pase invalido. Por favor provee un numero entre 0 y 100.';
         }
         if (!materia.pase && materia.pase !== 0) {
-            errors['pase'] = 'Pase is required.';
+            errors['pase'] = 'Pase es requerido.';
         }
 
         // Validate 'nombre' field
         if (!materia.nombre || materia.nombre.trim() === '') {
-            errors['nombre'] = 'Nombre is required. Please provide a non-empty string.';
+            errors['nombre'] = 'Nombre es requerido. Por favor provee una cadena no vacia.';
         }
 
         // Validate 'profe' field
         if (!materia.profe || materia.profe.trim() === '') {
-            errors['profe'] = 'Profe is required. Please provide a non-empty string.';
+            errors['profe'] = 'Profe es requerido. Por favor provee una cadena no vacia.';
         }
 
         // Validate 'horario' field
         if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?\d|2[0-3]):[0-5]\d)$/.test(materia.horario.trim())) {
-            errors['horario'] = 'Horario is required. Please provide a valid format (e.g., LXV 13:00).';
+            errors['horario'] = 'Horario es requerido. Por favor provee un formato valido (e.g., LXV 13:00).';
         }
 
         // Validate 'evaluaciones' field
         if (!materia.evaluaciones || !Array.isArray(materia.evaluaciones)) {
-            errors['evaluaciones'] = 'Evaluaciones is required. Please provide an array.';
+            errors['evaluaciones'] = 'Evaluaciones es requerido. Por favor provee un arreglo.';
         } else {
             const evaluacionesErrors: ValidationErrors[] = [];
 
@@ -59,32 +59,32 @@ export function materiaValidator(): ValidatorFn {
 
                 // Validate 'nombre' field of 'Evaluacion'
                 if (!evaluacion.nombre || evaluacion.nombre.trim() === '') {
-                    evaluacionErrors['nombre'] = `Evaluacion ${index + 1}: Nombre is required. Please provide a non-empty string.`;
+                    evaluacionErrors['nombre'] = `Evaluacion ${index + 1}: Nombre es requerido. Por favor provee una cadena no vacia.`;
                 }
 
                 // Validate 'tipo' field of 'Evaluacion'
                 const tipoOptions = ['tarea', 'examen', 'proyecto', 'otro'];
                 if (!evaluacion.tipo || !tipoOptions.includes(evaluacion.tipo.trim())) {
-                    evaluacionErrors['tipo'] = `Evaluacion ${index + 1}: Tipo is required. Please provide one of the following options: tarea, examen, proyecto, otro.`;
+                    evaluacionErrors['tipo'] = `Evaluacion ${index + 1}: Tipo es requerido. Por favor selecciona una de las opciones: tarea, examen, proyecto, otro.`;
                 }
 
                 // Validate 'ptObtenidos' field of 'Evaluacion'
                 if (isNaN(evaluacion.ptObtenidos ?? 0) || (evaluacion.ptObtenidos ?? 0) < -1 || (evaluacion.ptObtenidos ?? 0) > 100) {
-                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: Invalid ptObtenidos. Please provide a number between 0 and 100.`;
+                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos invalido. Por favor provee un numero entre 0 y 100.`;
                 }
                 if (!evaluacion.ptObtenidos && evaluacion.ptObtenidos !== 0) {
-                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos is required.`;
+                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos es requerido.`;
                 }
                 if ((evaluacion.ptObtenidos ?? 0) > evaluacion.ptPosibles && evaluacion.ptPosibles) {
-                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos cannot be greater than PtPosibles.`;
+                    evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos no puede ser mayor que PtPosibles.`;
                 }
 
                 // Validate 'ptPosibles' field of 'Evaluacion'
                 if (isNaN(evaluacion.ptPosibles) || evaluacion.ptPosibles < 0 || evaluacion.ptPosibles > 100) {
-                    evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: Invalid ptPosibles. Please provide a number between 0 and 100.`;
+                    evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: PtPosibles invalido. Por favor provee un numero entre 0 y 100.`;
                 }
                 if (!evaluacion.ptPosibles && evaluacion.ptPosibles !== 0) {
-                    evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: PtPosibles is required.`;
+                    evaluacionErrors['ptPosibles'] = `Evaluacion ${index + 1}: PtPosibles es requerido.`;
                 }
 
                 // Add 'Evaluacion' errors to the array
@@ -111,7 +111,7 @@ export function ptPosiblesSumValidator(): ValidatorFn {
             sum += evaluacion.ptPosibles;
         }
         if (sum > 100) {
-            return { 'ptPosiblesSum': 'Total points possible across all evaluations should not exceed 100.' };
+            return { 'ptPosiblesSum': 'La suma de puntos posibles en todas las evaluaciones no debe exceder 100.' };
         }
         return null;
     };

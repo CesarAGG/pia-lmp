@@ -20,7 +20,7 @@ export class CrudService {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.get(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers }) as Observable<Materia>;
         } else {
-          throw new Error('User is not authenticated');
+          throw new Error('El usuario no esta autenticado');
         }
       })
     );
@@ -36,7 +36,7 @@ export class CrudService {
               const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
               return this.http.get(`${environment.apiBaseUrl}/api/materias/${user!.sub}`, { headers }) as Observable<Materia[]>;
             } else {
-              throw new Error('User is not authenticated');
+              throw new Error('El usuario no esta autenticado');
             }
           })
         )
@@ -51,7 +51,7 @@ export class CrudService {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.post(environment.apiBaseUrl + '/api/materia', materia, { headers });
         } else {
-          throw new Error('User is not authenticated');
+          throw new Error('El usuario no esta autenticado');
         }
       })
     );
@@ -64,7 +64,7 @@ export class CrudService {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.put(`${environment.apiBaseUrl}/api/materia/${materiaId}`, updatedMateria, { headers });
         } else {
-          throw new Error('User is not authenticated');
+          throw new Error('El usuario no esta autenticado ');
         }
       })
     );
@@ -77,7 +77,7 @@ export class CrudService {
           const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
           return this.http.delete(`${environment.apiBaseUrl}/api/materia/${materiaId}`, { headers });
         } else {
-          throw new Error('User is not authenticated');
+          throw new Error('El usuario no esta autenticado');
         }
       })
     );
@@ -93,7 +93,7 @@ export class CrudService {
               const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
               return this.http.delete(`${environment.apiBaseUrl}/api/materias/${user!.sub}`, { headers });
             } else {
-              throw new Error('User is not authenticated');
+              throw new Error('El usuario no esta autenticado');
             }
           })
         )

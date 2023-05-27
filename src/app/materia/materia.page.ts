@@ -28,7 +28,7 @@ export class MateriaPage implements OnInit {
       },
       error => {
         console.error('Failed to fetch materia', error);
-        this.error = `Failed to fetch materia: ${error.message}`;
+        this.error = `Fallo al obtener materia del servidor: ${error.message}`;
         this.presentToast(this.error);
       }
     );
