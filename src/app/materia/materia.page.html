@@ -16,7 +16,7 @@
       <ion-card-content>
         <p>Horario: {{ materia.horario }}</p>
 
-        <ng-container *ngFor="let tipo of ['examen', 'tarea', 'proyecto', 'otros']">
+        <ng-container *ngFor="let tipo of ['examen', 'tarea', 'proyecto', 'otro']">
           <ion-list *ngIf="materia.evaluaciones | filterByTipo: tipo as filteredEvaluaciones;"
             [hidden]="filteredEvaluaciones.length === 0">
             <ion-item>
