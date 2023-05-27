@@ -1,20 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- Add the menu-toggle button here -->
+    <ion-buttons slot="start">
+      <ion-button class="favicon" routerLink="/home">
+        <img src="../../assets/icon/favicon_transparent.png" alt="Home" slot="icon-only" width="30" height="30">
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>AGREGAR TITULO DE LA APP</ion-title>
+    <ion-title>Puntómetro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Lista de Materias</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-grid *ngIf="isLoggedIn; else loginMessage">
     <ion-row>
       <ion-col size="12" size-xs="12" size-sm="6" size-xl="4" *ngFor="let materia of materias$ | async">

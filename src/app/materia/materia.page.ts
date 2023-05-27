@@ -46,7 +46,7 @@ export class MateriaPage implements OnInit {
   }
 
   calcularProgreso(): { totalPtObtenidos: number, totalPtPerdidos: number } {
-    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.ptObtenidos ?? 0), 0);
+    const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + +(evaluacion.ptObtenidos ?? 0), 0);
     const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.completado ? evaluacion.ptPosibles : 0), 0);
     const totalPPerdidos = totalPP - totalPO;
     return { totalPtObtenidos: totalPO, totalPtPerdidos: totalPPerdidos };

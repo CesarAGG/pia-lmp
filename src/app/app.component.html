@@ -15,19 +15,15 @@
           </ion-item>
           <ion-item (click)="auth.logout()">
             <ion-icon name="log-out"></ion-icon>
-            <ion-label>Cerrar sesión</ion-label>
+            <ion-label>Cerrar Sesión</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="false" *ngIf="!(auth.isAuthenticated$ | async)">
           <ion-item [routerLink]="'/login'" routerDirection="forward">
             <ion-icon name="log-in"></ion-icon>
-            <ion-label>Iniciar sesión / Registrarse</ion-label>
+            <ion-label>Iniciar Sesión / Registrarse</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-item *ngIf="router.url !== '/home'" [routerLink]="'/home'">
-          <ion-icon name="home"></ion-icon>
-          <ion-label>Inicio</ion-label>
-        </ion-item>
         <ion-menu-toggle auto-hide="false" *ngIf="(auth.isAuthenticated$ | async) && router.url === '/home'">
           <ion-item (click)="presentAddModal()">
             <ion-icon name="add-circle"></ion-icon>

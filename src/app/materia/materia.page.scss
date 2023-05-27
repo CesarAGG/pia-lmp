@@ -12,3 +12,69 @@
     align-items: center;
     height: 70%;
 }
+
+/* Estilos generales */
+ion-card {
+    margin-bottom: 20px;
+}
+
+/* Estilos del encabezado */
+ion-card-header {
+    background-color: #1b95ae8f;
+    padding: 10px;
+}
+
+ion-card-subtitle {
+    font-size: 14px;
+    color: #CBD4C2;
+}
+
+/* Estilos del contenido */
+ion-card-content {
+    padding: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* Estilos de las listas */
+ion-list div {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+ion-item {
+    padding: 10px;
+}
+
+/* Estilos de los ítems de la lista */
+ion-item ion-label {
+    font-weight: bold;
+}
+
+/* Estilos del total */
+.total {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+ion-card-header ion-card-subtitle:first-child {
+    color: #FFFCFF;
+    /* Color: FFFCFF */
+}
+
+ion-list ion-item:first-child ion-label {
+    color: #247BA0;
+    /* Color: 247BA0 */
+}
+
+.horario {
+    color: #ffffff;
+    /* Color: FFCFF */
+}
+
+.favicon img:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}

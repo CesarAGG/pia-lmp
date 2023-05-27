@@ -43,8 +43,8 @@ export function materiaValidator(): ValidatorFn {
         }
 
         // Validate 'horario' field
-        if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?\d|2[0-3]):[0-5]\d)$/.test(materia.horario.trim())) {
-            errors['horario'] = 'Horario es requerido. Por favor provee un formato valido (e.g., LXV 13:00).';
+        if (!materia.horario || !/^([LMXJVSD]{1,7}\s([0-1]?\d|2[0-3]):[0-5]\d-([0-1]?\d|2[0-3]):[0-5]\d)$/.test(materia.horario.trim())) {
+            errors['horario'] = 'Horario es requerido en formato valido (e.g. LXV 8:00-9:00).';
         }
 
         // Validate 'evaluaciones' field
@@ -69,13 +69,13 @@ export function materiaValidator(): ValidatorFn {
                 }
 
                 // Validate 'ptObtenidos' field of 'Evaluacion'
-                if (isNaN(evaluacion.ptObtenidos ?? 0) || (evaluacion.ptObtenidos ?? 0) < -1 || (evaluacion.ptObtenidos ?? 0) > 100) {
+                if (isNaN(+(evaluacion.ptObtenidos ?? 0) ?? 0) || (+(evaluacion.ptObtenidos ?? 0) ?? 0) < -1 || (+(evaluacion.ptObtenidos ?? 0) ?? 0) > 100) {
                     evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos invalido. Por favor provee un numero entre 0 y 100.`;
                 }
-                if (!evaluacion.ptObtenidos && evaluacion.ptObtenidos !== 0) {
+                if (!+(evaluacion.ptObtenidos ?? 0) && +(evaluacion.ptObtenidos ?? 0) !== 0) {
                     evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos es requerido.`;
                 }
-                if ((evaluacion.ptObtenidos ?? 0) > evaluacion.ptPosibles && evaluacion.ptPosibles) {
+                if ((+(evaluacion.ptObtenidos ?? 0) ?? 0) > evaluacion.ptPosibles && evaluacion.ptPosibles) {
                     evaluacionErrors['ptObtenidos'] = `Evaluacion ${index + 1}: PtObtenidos no puede ser mayor que PtPosibles.`;
                 }
 

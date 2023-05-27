@@ -1,4 +1,68 @@
+ion-header {
+  background-color: #F1F1F1;
+}
+
+ion-toolbar ion-title {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+ion-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+ion-buttons {
+  color: #333;
+
+  ion-button {
+    color: #333;
+  }
+}
+
+ion-content {
+  padding: 20px;
+}
+
+ion-list-header {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-label {
+  color: #247BA0;
+  font-weight: bold;
+
+  [color="danger"] {
+    color: #ff0000;
+  }
+}
+
+ion-input {
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+ion-select {
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+ion-button {
+  margin-top: 10px;
+}
+
 .evaluacion-header {
-    padding: 8px;
+  padding: 8px;
+  font-weight: bold;
+
+  ion-label {
     font-weight: bold;
+  }
 }

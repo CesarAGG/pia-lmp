@@ -1,7 +1,7 @@
 export interface Evaluacion {
   nombre: string;
   tipo: string;
-  ptObtenidos: number | null;
+  ptObtenidos: string | number | null;
   ptPosibles: number;
   completado: boolean;
 }
