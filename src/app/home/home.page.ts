@@ -18,7 +18,7 @@ export class HomePage {
     this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       this.isLoggedIn = isAuthenticated;
       if (isAuthenticated) {
-        this.materias$ = this.crud.getAllMaterias() as Observable<Materia[]>;
+        this.materias$ = this.crud.getAllMaterias();
       }
     });
   }
