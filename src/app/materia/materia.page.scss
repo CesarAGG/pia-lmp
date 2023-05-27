@@ -39,7 +39,7 @@ p {
 }
 
 /* Estilos de las listas */
-ion-list {
+ion-list div {
     margin-top: 10px;
     border-top: 1px solid #ddd;
 }
@@ -54,8 +54,8 @@ ion-item ion-label {
 }
 
 /* Estilos del total */
-ion-item:last-child {
-    border-top: none;
+.total {
+    border-top: 1px solid #ddd;
     margin-top: 20px;
 }
 

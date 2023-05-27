@@ -5,10 +5,7 @@ ion-header {
 ion-toolbar ion-title {
   color: #ffffff;
   font-weight: bold;
-}
-
-ion-buttons ion-button {
-  color: #333;
+  font-size: 24px;
 }
 
 ion-title {
@@ -19,6 +16,10 @@ ion-title {
 
 ion-buttons {
   color: #333;
+
+  ion-button {
+    color: #333;
+  }
 }
 
 ion-content {
@@ -37,6 +38,10 @@ ion-item {
 ion-label {
   color: #247BA0;
   font-weight: bold;
+
+  [color="danger"] {
+    color: #ff0000;
+  }
 }
 
 ion-input {
@@ -53,15 +58,11 @@ ion-button {
   margin-top: 10px;
 }
 
-ion-label[color="danger"] {
-  color: #ff0000;
-}
-
 .evaluacion-header {
   padding: 8px;
   font-weight: bold;
-}
 
-.evaluacion-header ion-label {
-  font-weight: bold;
+  ion-label {
+    font-weight: bold;
+  }
 }
