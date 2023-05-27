@@ -52,14 +52,14 @@
               <ion-select-option value="otro">Otro</ion-select-option>
             </ion-select>
 
-            <ion-label position="floating">Puntos Obtenidos (-1 si no esta completada)</ion-label>
-            <ion-input formControlName="ptObtenidos" type="number" step="0.01" min="0" max="100"></ion-input>
-
             <ion-label position="floating">Puntos Posibles</ion-label>
             <ion-input formControlName="ptPosibles" type="number" step="0.01" min="0" max="100"></ion-input>
+
+            <ion-label position="floating">Puntos Obtenidos (-1 si no esta completada)</ion-label>
+            <ion-input formControlName="ptObtenidos" type="text"></ion-input>
           </ion-item>
         </ion-item>
-        <ion-button expand="full" fill="outline" (click)="addEvaluacion()">Add Evaluacion</ion-button>
+        <ion-button expand="full" fill="outline" (click)="addEvaluacion()">Agregar Evaluacion</ion-button>
       </ion-item-group>
       <div *ngIf="materiaForm.controls['evaluaciones'].errors?.hasOwnProperty('ptPosiblesSum') 
           && materiaForm.controls['evaluaciones'].touched">

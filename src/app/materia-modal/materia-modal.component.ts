@@ -21,7 +21,7 @@ export class MateriaModalComponent implements OnInit {
       profe: ['', Validators.required],
       horario: ['', Validators.required],
       salon: ['', Validators.required],
-      pase: ['', Validators.required],
+      pase: [70, Validators.required],
       evaluaciones: this.fb.array([], ptPosiblesSumValidator())
     }, { validators: materiaValidator() });
 
@@ -35,7 +35,7 @@ export class MateriaModalComponent implements OnInit {
     this.evaluaciones.push(this.fb.group({
       nombre: [evaluacion ? evaluacion.nombre : '', Validators.required],
       tipo: [evaluacion ? evaluacion.tipo : '', Validators.required],
-      ptObtenidos: [evaluacion?.ptObtenidos ? evaluacion.ptObtenidos : -1, [Validators.min(-1), Validators.max(100)]],
+      ptObtenidos: [evaluacion?.ptObtenidos ? evaluacion.ptObtenidos : "-1", Validators.required],
       ptPosibles: [evaluacion ? evaluacion.ptPosibles : '', Validators.required],
       completado: [false]
     }));
@@ -57,10 +57,19 @@ export class MateriaModalComponent implements OnInit {
 
       this.materiaForm.get('evaluaciones')!.valueChanges.subscribe(evaluaciones => {
         evaluaciones.forEach((evaluacion: Evaluacion, index: number) => {
-          if (evaluacion.ptObtenidos !== -1) {
+          if (+(evaluacion.ptObtenidos ?? 0) !== -1) {
             this.evaluaciones.at(index).get('completado')!.setValue(true, { emitEvent: false });
           } else {
             this.evaluaciones.at(index).get('completado')!.setValue(false, { emitEvent: false });
+          }
+
+          // Check if value is a string and contains the '%' character
+          if (typeof evaluacion.ptObtenidos === 'string' && evaluacion.ptObtenidos.includes('%')) {
+            const percentage = parseFloat(evaluacion.ptObtenidos.replace('%', ''));
+            if (!isNaN(percentage)) {
+              const computedValue = (percentage * this.evaluaciones.at(index).get('ptPosibles')!.value) / 100;
+              this.evaluaciones.at(index).get('ptObtenidos')!.setValue(computedValue, { emitEvent: false });
+            }
           }
         });
       });
@@ -78,7 +87,7 @@ export class MateriaModalComponent implements OnInit {
       // Modify evaluaciones to replace -1 with null
       const materia: Materia = this.materiaForm.value;
       materia.evaluaciones.forEach(evaluacion => {
-        if (evaluacion.ptObtenidos === -1) {
+        if (+(evaluacion.ptObtenidos ?? 0) === -1) {
           evaluacion.ptObtenidos = null;
           evaluacion.completado = false;
         } else {
