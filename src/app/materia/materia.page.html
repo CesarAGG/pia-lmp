@@ -14,7 +14,7 @@
         <ion-card-subtitle>{{ materia.profe }} - {{ materia.salon }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p>Horario: {{ materia.horario }}</p>
+        <p class="horario">Horario: {{ materia.horario }}</p>
 
         <ng-container *ngFor="let tipo of ['examen', 'tarea', 'proyecto', 'otros']">
           <ion-list *ngIf="materia.evaluaciones | filterByTipo: tipo as filteredEvaluaciones;"

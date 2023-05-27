@@ -1,0 +1,53 @@
+.menu {
+  --ion-background-color: #50514F; /* Color: 50514F */
+}
+
+ion-toolbar {
+  --ion-background-color: #247BA0; /* Color: 247BA0 */
+  --ion-color: #FFF; /* Color: FFF */
+  padding: 16px;
+}
+
+ion-title {
+  color: #FFF; /* Color: FFF */
+}
+
+ion-item ion-icon {
+  color: #0679c5; /* Color: 50514F */
+}
+
+ion-item ion-label {
+  color: #ffffff; /* Color: 50514F */
+}
+
+ion-item-divider {
+  --ion-color: #C3B299; /* Color: C3B299 */
+}
+
+
+
+ion-item {
+  --ion-background-color: #FFF; /* Color: FFF */
+  --ion-color: #333; /* Color: 333 */
+}
+
+ion-item ion-label {
+  --ion-color: #333; /* Color: 333 */
+}
+
+ion-item ion-icon {
+  --ion-color: #333; /* Color: 333 */
+}
+
+ion-item:last-child {
+  border-bottom: none;
+}
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
