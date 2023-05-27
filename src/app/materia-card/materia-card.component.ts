@@ -20,7 +20,7 @@ export class MateriaCardComponent {
     const totalPO = this.materia.evaluaciones.reduce((total, evaluacion) => total + +(evaluacion.ptObtenidos ?? 0), 0);
     const totalPP = this.materia.evaluaciones.reduce((total, evaluacion) => total + (evaluacion.completado ? evaluacion.ptPosibles : 0), 0);
     const totalPPerdidos = totalPP - totalPO;
-    return { totalPtObtenidos: totalPO, totalPtPerdidos: totalPPerdidos };
+    return { totalPtObtenidos: Math.round(totalPO * 100) / 2, totalPtPerdidos: Math.round(totalPPerdidos * 100) / 2 };
   }
 }
 
